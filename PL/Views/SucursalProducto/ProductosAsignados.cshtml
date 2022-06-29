@@ -1,0 +1,52 @@
+﻿@model BL.SucursalProducto
+@{
+    ViewBag.Title = "ProductosAsignados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Productos con los que cuenta esta sucursal</h2>
+
+
+
+<div class="row">
+    @if (Model.SucursalProductos != null)
+    {
+        foreach (BL.SucursalProducto sucursalProducto in Model.SucursalProductos)
+        {
+            <div class="col-lg-3">
+                <div class="card-deck">
+                    <div class="card" style="width: 25rem; height:30rem; margin-bottom:8rem">
+                        <div class="list-group">
+                            <div class="text-center">
+                                @if (sucursalProducto.Producto.Imagen != null)
+                                {
+                                    <p><img src="data:image/jpg;base64,@Convert.ToBase64String(sucursalProducto.Producto.Imagen)" style=" height:150px; width: 150px;" alt="Card image cap" /></p>
+                                }
+
+                                else
+                                {
+                                    <p><img src="~/Images/Sinimagen.jpg" style=" height:150px; width:150px;" /></p>
+                                }
+
+                                <h4 class="card-title">@sucursalProducto.Producto.Nombre</h4>
+                                <p class="card-text">$@sucursalProducto.Producto.Precio</p>
+                                <p class="card-text">@sucursalProducto.Producto.Descripcion</p>
+
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        }
+    }
+
+</div>
+<div class="col-md-3">
+    
+    @Html.ActionLink("Regresar", "GetAll", "SucursalProducto", htmlAttributes: new { @class = "btn btn-danger" })
+</div>
+
+

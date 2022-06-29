@@ -1,0 +1,43 @@
+﻿@model BL.SucursalProducto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sucursales y sus Productos</h2>
+
+<div>
+    <div class="col-md-12">
+        <h5>A continuacion se muetran las sucursales con sus productos</h5>
+        <hr />
+    </div>
+</div>
+
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            
+            <td class="hidden">IdSucursalProducto</td>
+            <td class="hidden"> IdSucursal</td>
+            <td> Nombre de la sucursal </td>
+            <td>Productos</td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (BL.SucursalProducto SucursalProducto in Model.SucursalProductos)
+        {
+        <tr>
+            
+            <td class="hidden">@SucursalProducto.IdSucursalProducto</td>
+            <td class="hidden">@SucursalProducto.Sucursal.IdSucursal </td>
+            <td>@SucursalProducto.Sucursal.Nombre</td>
+            <td><a class="btn btn-primary glyphicon glyphicon-bishop" href="@Url.Action("ProductosAsignados", "SucursalProducto", new { IdSucursal = SucursalProducto.Sucursal.IdSucursal })"></a></td>
+
+        </tr>
+        }
+
+    </tbody>
+
+</table>
